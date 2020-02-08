@@ -59,12 +59,13 @@ class ChurnSimulation:
         self.tmp_sub_file_name = os.path.join(tempfile.gettempdir(),'{}_tmp_sub.csv'.format(self.model_name))
         self.tmp_event_file_name=os.path.join(tempfile.gettempdir(),'{}_tmp_event.csv'.format(self.model_name))
 
-        self.db = Postgres("postgres://%s:%s@localhost/%s" % (
+        self.db = Postgres("postgres://%s:%s@127.0.0.1/%s" % (
         os.environ['CHURN_DB_USER'], os.environ['CHURN_DB_PASS'], os.environ['CHURN_DB']))
 
         self.con = post.connect( database= os.environ['CHURN_DB'],
                                  user= os.environ['CHURN_DB_USER'],
-                                 password=os.environ['CHURN_DB_PASS'])
+                                 password=os.environ['CHURN_DB_PASS'],
+                                 host='127.0.0.1')
 
     def remove_tmp_files(self):
         '''
